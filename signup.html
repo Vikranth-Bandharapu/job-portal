@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Stackly</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="footer.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <a href="signup.html"><img src="images/white-logo.webp" alt="Stackly Logo"></a>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="company.html">Companies</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </nav>
+  </header>
+
+  <!-- Signup Form -->
+  <section class="login-section">
+    <div class="login-container">
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <div class="input-group">
+          <input type="text" id="signupName" placeholder="Full Name" required>
+        </div>
+        <div class="input-group">
+          <input type="email" id="signupEmail" placeholder="Email" required>
+        </div>
+        <div class="input-group">
+          <input type="password" id="signupPassword" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn">Sign Up</button>
+        <p id="signupError" style="color:red; margin-top:10px;"></p>
+      </form>
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Stackly. All rights reserved.
+    <a href="#">Privacy</a> | 
+    <a href="#">Terms</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/signup.js"></script>
+</body>
+</html>

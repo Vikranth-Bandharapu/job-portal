@@ -1,0 +1,760 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ------------------ HERO SECTION ------------------ */
+.hero {
+  background-color: #0073b1;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h1 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+/* Search Bar */
+.hero .search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap; /* wrap only on mobile */
+  margin-top: 20px;
+}
+
+.hero .search-bar input {
+  padding: 10px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.hero .search-bar button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #004974;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hero .search-bar button:hover {
+  background-color: #00334d;
+}
+
+/* ------------------ FEATURED JOBS ------------------ */
+.featured-jobs, .companies {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.job-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.job-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.job-card:hover {
+  transform: scale(1.05);
+}
+
+.company-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.company-logos img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ------------------ RESPONSIVE HEADER ------------------ */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background-color: #0073b1;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    padding: 10px;
+  }
+  nav ul.active {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+/* ------------------ LOGIN PAGE ------------------ */
+.login-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 80vh;
+  background-color: #f5f5f5;
+}
+
+.login-container {
+  background-color: white;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-container .input-group {
+  margin-bottom: 20px;
+}
+
+.login-container .input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-container .password-wrapper {
+  position: relative;
+}
+
+.login-container .password-wrapper i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+}
+
+.login-container .forgot {
+  display: block;
+  text-align: right;
+  margin-bottom: 20px;
+  color: #0073b1;
+  text-decoration: none;
+}
+
+.login-container .forgot:hover {
+  text-decoration: underline;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #0073b1;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #004974;
+}
+
+.login-container p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login-container a {
+  color: #0073b1;
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------ MOBILE LOGIN ------------------ */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 30px 20px;
+  }
+}
+
+/* ------------------ FOOTER ------------------ */
+footer {
+  background-color: #f5f5f5;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+footer a {
+  color: #0073b1;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------ SIGNUP PAGE ------------------ */
+.signup-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 80vh;
+  background-color: #f5f5f5;
+}
+
+.signup-container {
+  background-color: white;
+  padding: 40px;
+  max-width: 450px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.signup-container .input-group {
+  margin-bottom: 20px;
+}
+
+.signup-container .input-group input,
+.signup-container .input-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.signup-container .password-wrapper {
+  position: relative;
+}
+
+.signup-container .password-wrapper i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #0073b1;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.signup-container button:hover {
+  background-color: #004974;
+}
+
+.signup-container p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.signup-container a {
+  color: #0073b1;
+  text-decoration: none;
+}
+
+.signup-container a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .signup-container {
+    padding: 30px 20px;
+  }
+}
+
+
+/* ------------------ FORGOT PASSWORD PAGE ------------------ */
+.forgot-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 80vh;
+  background-color: #f5f5f5;
+}
+
+.forgot-container {
+  background-color: white;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.forgot-container h2 {
+  margin-bottom: 15px;
+}
+
+.forgot-container p {
+  margin-bottom: 20px;
+}
+
+.forgot-container .input-group {
+  margin-bottom: 20px;
+}
+
+.forgot-container input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.forgot-container button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #0073b1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.forgot-container button:hover {
+  background-color: #004974;
+}
+
+.forgot-container a {
+  color: #0073b1;
+  text-decoration: none;
+}
+
+.forgot-container a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .forgot-container {
+    padding: 30px 20px;
+  }
+}
+
+
+.notfound-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.notfound-container h1 {
+  font-size: 8rem;
+  color: #0073b1;
+  margin: 0;
+}
+
+.notfound-container h2 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.notfound-container p {
+  margin: 20px 0;
+}
+
+.notfound-container .btn {
+  padding: 12px 25px;
+  background-color: #0073b1;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.notfound-container .btn:hover {
+  background-color: #004974;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .notfound-container h1 {
+    font-size: 5rem;
+  }
+  .notfound-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+
+
+/* ------------------ JOBS HERO / SEARCH ------------------ */
+.jobs-hero {
+  background-color: #0073b1;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.jobs-search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.jobs-search-bar input,
+.jobs-search-bar select {
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+  width: 200px;
+  max-width: 100%;
+}
+
+.jobs-search-bar button {
+  padding: 12px 20px;
+  background-color: #004974;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.jobs-search-bar button i {
+  margin-right: 5px;
+}
+
+.jobs-search-bar button:hover {
+  background-color: #00334d;
+}
+
+/* ------------------ JOB LISTINGS ------------------ */
+.job-listings {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.job-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.job-card {
+  background-color: white;
+  padding: 20px;
+  width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.job-card h3 {
+  margin-top: 0;
+}
+
+.job-card button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #0073b1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.job-card button:hover {
+  background-color: #004974;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 768px) {
+  .jobs-search-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .jobs-search-bar input,
+  .jobs-search-bar select,
+  .jobs-search-bar button {
+    width: 90%;
+  }
+
+  .job-card {
+    width: 90%;
+  }
+}
+
+
+
+/* ------------------ COMPANIES HERO ------------------ */
+.companies-hero {
+  background-color: #0073b1;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.companies-hero h1 {
+  margin-bottom: 10px;
+}
+
+.companies-hero p {
+  font-size: 1.1rem;
+}
+
+/* ------------------ COMPANY LOGOS ------------------ */
+.company-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+}
+
+.company-logos img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.company-logos img:hover {
+  transform: scale(1.1);
+}
+
+/* ------------------ COMPANY CARDS ------------------ */
+.company-listings {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.company-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.company-card {
+  background-color: white;
+  padding: 20px;
+  width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.company-card h3 {
+  margin-top: 0;
+}
+
+.company-card button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #0073b1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.company-card button:hover {
+  background-color: #004974;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 768px) {
+  .company-logos {
+    gap: 20px;
+  }
+  .company-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .company-card {
+    width: 90%;
+  }
+}
+
+
+/* ------------------ PROFILE SECTION ------------------ */
+.profile-section {
+  padding: 60px 20px;
+  background-color: #f5f5f5;
+  min-height: 80vh;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-header img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info h2 {
+  margin: 0;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+
+.user-info button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #0073b1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-info button:hover {
+  background-color: #004974;
+}
+
+/* Applied Jobs */
+.applied-jobs {
+  margin-top: 40px;
+}
+
+.applied-jobs h3 {
+  margin-bottom: 20px;
+}
+
+.applied-jobs .job-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.applied-jobs .job-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  width: 280px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.applied-jobs .job-card button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  border: none;
+  background-color: #0073b1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.applied-jobs .job-card button:hover {
+  background-color: #004974;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .applied-jobs .job-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  background-color: #0073b1;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btn:hover {
+  background-color: #004974;
+  transform: scale(1.02);
+  text-decoration: none;
+  color: white;
+}

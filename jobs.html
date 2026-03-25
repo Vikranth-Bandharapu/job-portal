@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobPortal - Jobs</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+   <div class="logo">
+  <a href="jobs.html">
+    <img src="images/white-logo.webp" alt="Stackly Logo">
+  </a>
+</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="company.html">Companies</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </nav>
+  </header>
+
+  <!-- Jobs Hero / Search -->
+  <section class="jobs-hero">
+    <div class="jobs-search-bar">
+      <input type="text" placeholder="Job title, keywords...">
+      <select>
+        <option value="">Location</option>
+        <option value="remote">Remote</option>
+        <option value="hyderabad">Hyderabad</option>
+        <option value="bangalore">Bangalore</option>
+      </select>
+      <select>
+        <option value="">Job Type</option>
+        <option value="fulltime">Full-time</option>
+        <option value="parttime">Part-time</option>
+        <option value="internship">Internship</option>
+      </select>
+      <button><i class="fas fa-search"></i> Search</button>
+    </div>
+  </section>
+
+  <!-- Job Listings -->
+  <section class="job-listings">
+    <div class="job-cards">
+      <!-- Example Job Card -->
+      <div class="job-card">
+        <h3>Frontend Developer</h3>
+        <p><strong>Company:</strong> ABC Tech</p>
+        <p><strong>Location:</strong> Hyderabad</p>
+        <p><strong>Experience:</strong> 1-3 Years</p>
+      <a href="404.html" class="btn apply-btn">Apply Now</a>
+      </div>
+      <div class="job-card">
+        <h3>Backend Developer</h3>
+        <p><strong>Company:</strong> XYZ Solutions</p>
+        <p><strong>Location:</strong> Bangalore</p>
+        <p><strong>Experience:</strong> 3-5 Years</p>
+        <a href="404.html" class="btn apply-btn">Apply Now</a>
+      </div>
+      <div class="job-card">
+        <h3>UI/UX Designer</h3>
+        <p><strong>Company:</strong> Creative Minds</p>
+        <p><strong>Location:</strong> Remote</p>
+        <p><strong>Experience:</strong> 0-1 Years</p>
+       <a href="404.html" class="btn apply-btn">Apply Now</a>
+      </div>
+      <!-- Add more cards as needed -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 JobPortal. All rights reserved.
+    <a href="#">Privacy</a> | 
+    <a href="#">Terms</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/jobs.js"></script>
+</body>
+</html>
