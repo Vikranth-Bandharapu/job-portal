@@ -1,91 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JobPortal - Jobs</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="header.css">
-  <link rel="stylesheet" href="footer.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jobs</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* BODY */
+body{
+margin:0;
+font-family:Arial;
+background:#f4f6fa;
+}
+
+/* HEADER */
+.top-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:#0f3460;
+color:white;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+}
+
+.main-menu{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+.main-menu a{
+color:white;
+text-decoration:none;
+}
+
+/* LAYOUT */
+.jobs{
+padding:20px;
+}
+
+.job-layout{
+display:flex;
+gap:20px;
+}
+
+/* FILTERS */
+.filters{
+width:250px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.filters label{
+display:block;
+margin-top:10px;
+}
+
+.filters select{
+width:100%;
+padding:8px;
+margin-top:5px;
+}
+
+/* JOB CARDS */
+.job-container{
+flex:1;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.job-card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.job-card:hover{
+transform:translateY(-5px);
+}
+
+.job-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.company-logo{
+width:40px;
+}
+
+.job-info{
+margin-top:10px;
+font-size:14px;
+color:gray;
+}
+
+.apply-btn{
+margin-top:10px;
+padding:8px;
+background:#0f3460;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.job-layout{
+flex-direction:column;
+}
+.filters{
+width:100%;
+}
+}
+
+.logo-img{
+height:45px;
+cursor:pointer;
+}
+
+.logo-img:hover{
+transform:scale(1.05);
+transition:0.3s;
+}
+.job-search{
+display:flex;
+justify-content:center;
+gap:10px;
+padding:20px;
+}
+
+.job-search input{
+padding:10px;
+width:250px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.job-search button{
+padding:10px 15px;
+background:#e94560;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+
+.tags{
+text-align:center;
+margin-bottom:20px;
+}
+
+.tags span{
+background:#eee;
+padding:8px 12px;
+margin:5px;
+border-radius:20px;
+cursor:pointer;
+}
+
+.tags span:hover{
+background:#e94560;
+color:white;
+}
+
+.posted{
+font-size:12px;
+color:gray;
+margin-top:5px;
+}
+
+.job-card{
+opacity:0;
+transform:translateY(40px);
+animation:fadeUp 0.6s forwards;
+}
+
+@keyframes fadeUp{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Header -->
-  <header>
-   <div class="logo">
-  <a href="jobs.html">
-    <img src="images/white-logo.webp" alt="Stackly Logo">
-  </a>
+<!-- HEADER -->
+<header class="top-header">
+<a href="jobs.html">
+  <img src="./images/white-logo.webp" class="logo-img">
+</a>
+
+<ul class="main-menu">
+<li><a href="index.html">Home</a></li>
+<li><a href="jobs.html">Jobs</a></li>
+<li><a href="companies.html">Companies</a></li>
+<li><a href="profile.html">Profile</a></li>
+<li><a href="login.html">Login</a></li>
+</ul>
+</header>
+<section class="job-search">
+  <input type="text" placeholder="Search jobs...">
+  <button>Search</button>
+  
+</section>
+<div class="tags">
+  <span>Frontend</span>
+  <span>Backend</span>
+  <span>Remote</span>
+  <span>Internship</span>
 </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="company.html">Companies</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-      <div class="hamburger"><i class="fas fa-bars"></i></div>
-    </nav>
-  </header>
+<h2 style="text-align:center;">🔥 Featured Jobs</h2>
+<!-- JOB SECTION -->
+<section class="jobs">
 
-  <!-- Jobs Hero / Search -->
-  <section class="jobs-hero">
-    <div class="jobs-search-bar">
-      <input type="text" placeholder="Job title, keywords...">
-      <select>
-        <option value="">Location</option>
-        <option value="remote">Remote</option>
-        <option value="hyderabad">Hyderabad</option>
-        <option value="bangalore">Bangalore</option>
-      </select>
-      <select>
-        <option value="">Job Type</option>
-        <option value="fulltime">Full-time</option>
-        <option value="parttime">Part-time</option>
-        <option value="internship">Internship</option>
-      </select>
-      <button><i class="fas fa-search"></i> Search</button>
-    </div>
-  </section>
+<h2>All Jobs</h2>
 
-  <!-- Job Listings -->
-  <section class="job-listings">
-    <div class="job-cards">
-      <!-- Example Job Card -->
-      <div class="job-card">
-        <h3>Frontend Developer</h3>
-        <p><strong>Company:</strong> ABC Tech</p>
-        <p><strong>Location:</strong> Hyderabad</p>
-        <p><strong>Experience:</strong> 1-3 Years</p>
-      <a href="404.html" class="btn apply-btn">Apply Now</a>
-      </div>
-      <div class="job-card">
-        <h3>Backend Developer</h3>
-        <p><strong>Company:</strong> XYZ Solutions</p>
-        <p><strong>Location:</strong> Bangalore</p>
-        <p><strong>Experience:</strong> 3-5 Years</p>
-        <a href="404.html" class="btn apply-btn">Apply Now</a>
-      </div>
-      <div class="job-card">
-        <h3>UI/UX Designer</h3>
-        <p><strong>Company:</strong> Creative Minds</p>
-        <p><strong>Location:</strong> Remote</p>
-        <p><strong>Experience:</strong> 0-1 Years</p>
-       <a href="404.html" class="btn apply-btn">Apply Now</a>
-      </div>
-      <!-- Add more cards as needed -->
-    </div>
-  </section>
+<div class="job-layout">
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2026 JobPortal. All rights reserved.
-    <a href="#">Privacy</a> | 
-    <a href="#">Terms</a>
-  </footer>
+<!-- FILTER -->
+<div class="filters">
+<h3>Filters</h3>
 
-  <script src="js/main.js"></script>
-  <script src="js/jobs.js"></script>
+<label>Location</label>
+<select>
+<option>All</option>
+<option>Remote</option>
+<option>Hyderabad</option>
+</select>
+
+<label>Experience</label>
+<select>
+<option>All</option>
+<option>0-2 Years</option>
+<option>3-5 Years</option>
+</select>
+
+<label>Salary</label>
+<select>
+<option>All</option>
+<option>3-6 LPA</option>
+<option>6-10 LPA</option>
+</select>
+
+</div>
+
+
+
+<!-- JOB LIST -->
+<div class="job-container">
+
+<div class="job-card">
+<div class="job-top">
+  <p class="posted">Posted 2 days ago</p>
+<h3>Frontend Developer</h3>
+<i class="fa-regular fa-bookmark" onclick="saveJob(this)"></i>
+</div>
+<p>ABC Tech</p>
+
+<div class="job-info">
+<p>📍 Remote</p>
+<p>💼 2 Years</p>
+<p>💰 ₹5 LPA</p>
+</div>
+
+<button class="apply-btn" onclick="goTo404()">Apply</button>
+</div>
+
+<div class="job-card">
+<div class="job-top">
+  <p class="posted">Posted 2 days ago</p>
+<h3>Backend Developer</h3>
+<i class="fa-regular fa-bookmark" onclick="saveJob(this)"></i>
+</div>
+<p>XYZ Company</p>
+
+<div class="job-info">
+<p>📍 Hyderabad</p>
+<p>💼 3 Years</p>
+<p>💰 ₹8 LPA</p>
+</div>
+
+<button class="apply-btn" onclick="goTo404()">Apply</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+<div style="text-align:center; margin:20px;">
+  <button onclick="goTo404()">Load More</button>
+</div>
+<script>
+
+function goTo404(){
+  window.location.href="404.html";
+}
+
+function saveJob(icon){
+
+let card = icon.closest(".job-card");
+
+let job = {
+title: card.querySelector("h3").innerText,
+company: card.querySelector("p").innerText
+};
+
+let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+jobs.push(job);
+localStorage.setItem("jobs", JSON.stringify(jobs));
+
+icon.classList.toggle("fa-solid");
+icon.style.color="#e94560";
+}
+
+</script>
+
 </body>
 </html>

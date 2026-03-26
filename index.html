@@ -1,87 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JobPortal - Home</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="header.css">
-  <link rel="stylesheet" href="footer.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Portal</title>
+<link rel="stylesheet" href="./stlye.css">
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+/* HEADER */
+.top-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:#0f3460;
+color:white;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+}
+
+/* MENU */
+.main-menu{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+.main-menu li a{
+color:white;
+text-decoration:none;
+}
+
+/* DROPDOWN */
+.dropdown{
+position:relative;
+}
+.dropdown-menu{
+display:none;
+position:absolute;
+top:100%;   /* ✅ instead of 35px */
+left:0;
+background:white;
+list-style:none;
+border-radius:8px;
+overflow:hidden;
+}
+
+.dropdown-menu li{
+padding:10px 15px;
+}
+
+.dropdown-menu li a{
+color:black;
+}
+
+.dropdown:hover .dropdown-menu{
+display:block;
+}
+
+.dropdown-menu{
+  margin-top: 0;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:80px 20px;
+background:linear-gradient(135deg,#0f3460,#1a1a2e);
+color:white;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+.hero p{
+margin-top:10px;
+}
+
+/* SEARCH */
+.search-box{
+margin-top:20px;
+}
+
+.search-box input{
+padding:12px;
+width:250px;
+border:none;
+border-radius:5px;
+}
+
+.search-box button{
+padding:12px 20px;
+background:#e94560;
+border:none;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* CATEGORY BUTTONS */
+.categories{
+margin-top:20px;
+}
+
+.categories button{
+margin:5px;
+padding:8px 15px;
+border:none;
+border-radius:20px;
+background:white;
+color:#0f3460;
+cursor:pointer;
+}
+
+/* JOB SECTION */
+.jobs{
+padding:40px 20px;
+}
+
+.jobs h2{
+margin-bottom:20px;
+}
+
+/* JOB CARDS */
+.job-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+gap:20px;
+}
+.job-card{
+transition:0.3s;
+}
+
+.job-card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.job-card h3{
+margin-bottom:10px;
+}
+
+.job-card p{
+font-size:14px;
+color:gray;
+}
+
+.apply-btn{
+margin-top:10px;
+padding:8px 12px;
+background:#0f3460;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:15px;
+background:#0f3460;
+color:white;
+margin-top:30px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+.main-menu{
+display:none;
+flex-direction:column;
+background:#0f3460;
+position:absolute;
+top:60px;
+right:0;
+width:200px;
+padding:10px;
+}
+
+.main-menu.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+cursor:pointer;
+}
+
+}
+
+.menu-toggle{
+display:none;
+font-size:22px;
+}
+
+.logo-img{
+height:45px;
+cursor:pointer;
+}
+
+.logo-img:hover{
+transform:scale(1.05);
+transition:0.3s;
+}
+
+
+.stats{
+display:flex;
+justify-content:space-around;
+padding:40px;
+background:white;
+}
+
+.stat-box{
+text-align:center;
+}
+
+.stat-box h2{
+color:#0f3460;
+font-size:28px;
+}
+.companies{
+text-align:center;
+padding:40px;
+}
+
+.company-logos{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.company-logos img{
+width:80px;
+transition:0.3s;
+}
+
+.company-logos img:hover{
+transform:scale(1.1);
+}
+
+.hero h1{
+animation:fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(-20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+button{
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">
-  <a href="index.html">
-    <img src="images/white-logo.webp" alt="Stackly Logo">
-  </a>
+<!-- HEADER -->
+<header class="top-header">
+<a href="index.html">
+  <img src="./images/white-logo.webp" class="logo-img">
+</a>
+
+<ul class="main-menu" id="menu">
+<li><a href="index.html">Home</a></li>
+
+<li class="dropdown">
+<a href="jobs.html">Jobs</a>
+<ul class="dropdown-menu">
+<li><a href="404.html">IT Jobs</a></li>
+<li><a href="404.html">Remote Jobs</a></li>
+<li><a href="404.html">Internships</a></li>
+</ul>
+</li>
+<div class="header-icons">
+  <i class="fa fa-bell"></i>
+  <i class="fa fa-moon" onclick="toggleDarkMode()"></i>
 </div>
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="company.html">Companies</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-      <div class="hamburger">
-        <i class="fas fa-bars"></i>
+<li><a href="companies.html">Companies</a></li>
+<li><a href="profile.html">Profile</a></li>
+<li><a href="login.html">Login</a></li>
+</ul>
+
+<div class="menu-toggle" onclick="toggleMenu()">
+<i class="fa fa-bars"></i>
+</div>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<h1>Find Your Dream Job</h1>
+<p>Search from thousands of jobs</p>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search jobs..." onkeyup="showSuggestions()">
+<div id="suggestions"></div>
+<button>Search</button>
+</div>
+
+<div class="categories">
+<button>Frontend</button>
+<button>Backend</button>
+<button>Remote</button>
+<button>Internship</button>
+</div>
+</section>
+
+<!-- JOBS -->
+<section class="jobs">
+
+<h2>Latest Jobs</h2>
+
+<div class="job-layout">
+
+  <!-- FILTER SIDEBAR -->
+  <div class="filters">
+
+    <h3>Filters</h3>
+
+    <label>Location</label>
+    <select>
+      <option>All</option>
+      <option>Remote</option>
+      <option>Hyderabad</option>
+      <option>Bangalore</option>
+    </select>
+
+    <label>Experience</label>
+    <select>
+      <option>All</option>
+      <option>0-1 Years</option>
+      <option>2-4 Years</option>
+      <option>5+ Years</option>
+    </select>
+
+    <label>Salary</label>
+    <select>
+      <option>All</option>
+      <option>3-5 LPA</option>
+      <option>5-10 LPA</option>
+      <option>10+ LPA</option>
+    </select>
+
+    <label>Job Type</label>
+    <select>
+      <option>All</option>
+      <option>Full Time</option>
+      <option>Part Time</option>
+      <option>Remote</option>
+    </select>
+
+  </div>
+
+  <!-- JOB LIST -->
+  <div class="job-container">
+
+    <!-- CARD 1 -->
+    <div class="job-card">
+      <div class="job-top">
+     <div class="logo">Next<span style="color:#e94560;">Hire</span></div>
+        <div>
+          <h3>Frontend Developer</h3>
+          <p>ABC Tech</p>
+        </div>
+       <i class="fa-regular fa-bookmark save-icon" onclick="saveJob(this)"></i>
       </div>
-    </nav>
-  </header>
 
-  <!-- Hero / Job Search -->
-  <section class="hero">
-    <h1>Find Your Dream Job</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Job title or keywords">
-      <input type="text" placeholder="Location">
-      <button>Search</button>
-    </div>
-  </section>
-
-  <!-- Featured Jobs -->
-  <section class="featured-jobs">
-    <h2>Featured Jobs</h2>
-    <div class="job-cards">
-      <div class="job-card">
-        <h3>Frontend Developer</h3>
-        <p>Google - Bangalore</p>
-        <span>Full Time</span>
+      <div class="job-info">
+        <p><i class="fa fa-map-marker-alt"></i> Remote</p>
+        <p><i class="fa fa-briefcase"></i> 2-4 Years</p>
+        <p><i class="fa fa-money-bill"></i> ₹5-10 LPA</p>
       </div>
-      <div class="job-card">
-        <h3>Backend Developer</h3>
-        <p>Amazon - Hyderabad</p>
-        <span>Full Time</span>
-      </div>
-      <div class="job-card">
-        <h3>UI/UX Designer</h3>
-        <p>Microsoft - Mumbai</p>
-        <span>Part Time</span>
-      </div>
+
+      <a href="404.html">
+  <button class="apply-btn">Apply Now</button>
+</a>
     </div>
-  </section>
 
-  <!-- Companies -->
-  <section class="companies">
-    <h2>Top Companies</h2>
-    <div class="company-logos">
-      <img src="images/google_PNG102344 (1).webp" alt="Google">
-      <img src="./images/download (5).webp" alt="Amazon">
-      <img src="./images/download (3).webp" alt="Microsoft">
-      <img src="images/download (4).webp" alt="Facebook">
+    <!-- CARD 2 -->
+    <div class="job-card">
+      <div class="job-top">
+        <div class="logo">Next<span style="color:#e94560;">Hire</span></div>
+        <div>
+          <h3>Backend Developer</h3>
+          <p>XYZ Pvt Ltd</p>
+        </div>
+       <i class="fa-regular fa-bookmark save-icon" onclick="saveJob(this)"></i>
+      </div>
+
+      <div class="job-info">
+        <p><i class="fa fa-map-marker-alt"></i> Hyderabad</p>
+        <p><i class="fa fa-briefcase"></i> 3-5 Years</p>
+        <p><i class="fa fa-money-bill"></i> ₹6-12 LPA</p>
+      </div>
+
+      <a href="404.html">
+  <button class="apply-btn">Apply Now</button>
+</a>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2026 JobPortal. All rights reserved.
-    <a href="#">Privacy</a> | 
-    <a href="#">Terms</a>
-  </footer>
+  </div>
 
-  <script src="js/main.js"></script>
+</div>
+
+</section>
+<section class="stats">
+  <div class="stat-box">
+    <h2>10K+</h2>
+    <p>Jobs Posted</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>5K+</h2>
+    <p>Companies</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>20K+</h2>
+    <p>Candidates</p>
+  </div>
+</section>
+
+<section class="companies">
+<h2>Top Companies</h2>
+
+<div class="company-logos">
+<img src="./images/download (3).webp">
+<img src="./images/download (4).webp">
+<img src="./images/OIP (6).webp">
+<img src="./images/google_PNG102344 (1).webp">
+</div>
+</section>
+<!-- FOOTER -->
+<footer>
+<p>© 2026 Job Portal. All rights reserved.</p>
+</footer>
+
+<!-- SCRIPT -->
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("active");
+}
+function saveJob(icon){
+
+  let card = icon.closest(".job-card");
+
+  let job = {
+    title: card.querySelector("h3").innerText,
+    company: card.querySelector("p").innerText,
+    location: card.querySelector(".job-info p:nth-child(1)").innerText
+  };
+
+  let savedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
+
+  savedJobs.push(job);
+  localStorage.setItem("jobs", JSON.stringify(savedJobs));
+
+  // UI toggle
+  icon.classList.toggle("fa-regular");
+  icon.classList.toggle("fa-solid");
+
+  icon.style.color = "#e94560";
+}
+
+function toggleDarkMode(){
+document.body.classList.toggle("dark-mode");
+}
+
+
+document.querySelector(".fa-bell").onclick = function(){
+  alert("No new notifications");
+}
+
+let jobList = ["Frontend Developer","Backend Developer","UI Designer","React Developer","Full Stack Developer"];
+
+function showSuggestions(){
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  let box = document.getElementById("suggestions");
+
+  box.innerHTML = "";
+
+  if(input === "") return;
+
+  jobList.forEach(job => {
+    if(job.toLowerCase().includes(input)){
+      let div = document.createElement("div");
+      div.innerText = job;
+      div.onclick = () => {
+        document.getElementById("searchInput").value = job;
+        box.innerHTML = "";
+      };
+      box.appendChild(div);
+    }
+  });
+}
+
+let elements = document.querySelectorAll(".card, .job-card");
+
+window.addEventListener("scroll", ()=>{
+  elements.forEach(el=>{
+    let position = el.getBoundingClientRect().top;
+    let screen = window.innerHeight;
+
+    if(position < screen - 100){
+      el.style.opacity = 1;
+      el.style.transform = "translateY(0)";
+    }
+  });
+});
+
+</script>
+
 </body>
 </html>

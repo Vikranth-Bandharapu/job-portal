@@ -1,57 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Stackly</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="header.css">
-  <link rel="stylesheet" href="footer.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f6fa;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.form-box{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+width:300px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#0f3460;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+a{
+font-size:14px;
+}
+.back-btn{
+position:absolute;
+top:20px;
+left:20px;
+padding:8px 15px;
+background:#0f3460;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+width:auto;   /* ✅ fix full width issue */
+}
+</style>
 </head>
+
 <body>
+  <button onclick="goBack()" class="back-btn">← Back</button>
+<div class="form-box">
+<h2>Login</h2>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <a href="login.html"><img src="images/white-logo.webp" alt="Stackly Logo"></a>
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="company.html">Companies</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-      <div class="hamburger"><i class="fas fa-bars"></i></div>
-    </nav>
-  </header>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+<p><a href="404.html">Forgot Password?</a></p>
+<button onclick="login()">Login</button>
 
-  <!-- Login Form -->
-  <section class="login-section">
-    <div class="login-container">
-      <h2>Login</h2>
-      <form id="loginForm">
-        <div class="input-group">
-          <input type="email" id="loginEmail" placeholder="Email" required>
-        </div>
-        <div class="input-group">
-          <input type="password" id="loginPassword" placeholder="Password" required>
-        </div>
-        <button type="submit" class="btn">Login</button>
-        <p id="loginError" style="color:red; margin-top:10px;"></p>
-      </form>
-      <p class="forgot"><a href="forgot-password.html">Forgot Password?</a></p>
-      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-    </div>
-  </section>
+<p>Don't have account? <a href="signup.html">Signup</a></p>
+</div>
 
-  <footer>
-    &copy; 2026 Stackly. All rights reserved.
-    <a href="#">Privacy</a> | 
-    <a href="#">Terms</a>
-  </footer>
+<script>
+function login(){
 
-  <script src="js/main.js"></script>
-  <script src="js/login.js"></script>
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+let user = JSON.parse(localStorage.getItem("user"));
+
+if(!user){
+  alert("No account found. Please signup.");
+  return;
+}
+
+if(email === user.email && password === user.password){
+  localStorage.setItem("loggedIn", "true");
+ window.location.href = "404.html";
+}else{
+  alert("Invalid credentials");
+}
+
+}
+
+function goBack(){
+  window.history.back();
+}
+</script>
+
 </body>
 </html>
