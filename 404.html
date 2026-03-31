@@ -3,57 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page Not Found</title>
+<title>404 Not Found</title>
 
 <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
 body{
-font-family:Arial;
-background:#f4f6fa;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-text-align:center;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle at top, #1b4fa1, #0f172a);
+  color:#fff;
+  overflow:hidden;
 }
 
-.box{
-background:white;
-padding:40px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+/* BACKGROUND ANIMATION */
+body::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.05) 0px,
+    rgba(255,255,255,0.05) 2px,
+    transparent 2px,
+    transparent 20px
+  );
+  animation: move 10s linear infinite;
 }
 
-h1{
-font-size:50px;
-color:#e94560;
+@keyframes move{
+  from{transform:translate(0,0);}
+  to{transform:translate(-200px,-200px);}
 }
 
-button{
-margin-top:20px;
-padding:10px 20px;
-background:#0f3460;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
+/* CONTAINER */
+.container{
+  position:relative;
+  text-align:center;
+  z-index:2;
 }
+
+/* GLITCH 404 */
+.glitch{
+  font-size:120px;
+  font-weight:900;
+  position:relative;
+  color:#fff;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch{
+  0%{text-shadow:2px 2px #00c6ff, -2px -2px #ff00c8;}
+  25%{text-shadow:-2px 2px #00c6ff, 2px -2px #ff00c8;}
+  50%{text-shadow:2px -2px #00c6ff, -2px 2px #ff00c8;}
+  75%{text-shadow:-2px -2px #00c6ff, 2px 2px #ff00c8;}
+  100%{text-shadow:2px 2px #00c6ff, -2px -2px #ff00c8;}
+}
+
+/* TEXT */
+h2{
+  margin:10px 0;
+}
+
+p{
+  color:#ccc;
+  margin-bottom:20px;
+}
+
+/* BUTTON */
+.btn{
+  display:inline-block;
+  padding:12px 28px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  color:#fff;
+  transition:0.3s;
+  box-shadow:0 0 15px rgba(0,198,255,0.5);
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px rgba(0,198,255,0.9);
+}
+
+/* FLOATING IMAGE */
+.image img{
+  width:300px;
+  margin-top:20px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-20px);}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .glitch{font-size:80px;}
+  .image img{width:220px;}
+}
+
 </style>
-</head>
 
+</head>
 <body>
 
-<div class="box">
-<h1>404</h1>
-<p>Oops! Page not found</p>
+<div class="container">
 
-<button onclick="goHome()">Go to Home</button>
+  <h1 class="glitch">404</h1>
+  <h2>Oops! Page Not Found</h2>
+  <p>The page you are looking for doesn’t exist or has been moved.</p>
+
+  <a href="index.html" class="btn">Go Back Home</a>
+
 </div>
-
-<script>
-function goHome(){
-  window.location.href = "index.html";
-}
-</script>
 
 </body>
 </html>

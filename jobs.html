@@ -3,338 +3,599 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jobs</title>
+<title>Jobs - Stackly</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="./style.css">
 
 <style>
-
-/* BODY */
-body{
-margin:0;
-font-family:Arial;
-background:#f4f6fa;
+body {
+    background: linear-gradient(to right, #eef2f3, #f9fbfd);
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* HEADER */
-.top-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 30px;
-background:#0f3460;
-color:white;
-position:sticky;
-top:0;
-z-index:1000;
+/* Navbar */
+.navbar {
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.logo{
-font-size:22px;
-font-weight:bold;
+/* Search */
+.search-box {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.main-menu{
-display:flex;
-list-style:none;
-gap:20px;
+/* Sidebar */
+.filter-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.main-menu a{
-color:white;
-text-decoration:none;
+/* Job Cards */
+.job-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: 0.4s;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+.job-card::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    top: 0;
+    left: 0;
+}
+.job-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
 }
 
-/* LAYOUT */
-.jobs{
-padding:20px;
+/* Badge */
+.badge-job {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff4757;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
 }
 
-.job-layout{
-display:flex;
-gap:20px;
+/* Text */
+.job-title {
+    font-weight: 600;
+    font-size: 20px;
+}
+.company {
+    color: #555;
+}
+.meta {
+    font-size: 14px;
+    color: gray;
 }
 
-/* FILTERS */
-.filters{
-width:250px;
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+/* Button */
+.apply-btn {
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+    color: white;
+    border-radius: 25px;
+    padding: 6px 18px;
+    transition: 0.3s;
+}
+.apply-btn:hover {
+    transform: scale(1.1);
 }
 
-.filters label{
-display:block;
-margin-top:10px;
+/* Responsive */
+@media(max-width:768px){
+    .filter-box{
+        margin-bottom:20px;
+    }
 }
 
-.filters select{
-width:100%;
-padding:8px;
-margin-top:5px;
+
+.job-card:nth-child(even) {
+    border-left: 5px solid #0d6efd;
+}
+.job-card:nth-child(odd) {
+    border-left: 5px solid #00c6ff;
 }
 
-/* JOB CARDS */
-.job-container{
-flex:1;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+
+.footer{
+  background: linear-gradient(135deg, #0f3460, #1b4fa1);
+  color: #fff;
+  padding: 60px 80px;
 }
 
-.job-card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-transition:0.3s;
+/* PERFECT GRID */
+.footer-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  align-items: start;
 }
 
-.job-card:hover{
-transform:translateY(-5px);
+/* TEXT */
+.footer-box h2{
+  margin-bottom: 10px;
 }
 
-.job-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
+.footer-box p{
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #dcdcdc;
 }
 
-.company-logo{
-width:40px;
+.footer-box h3{
+  margin-bottom: 15px;
 }
 
-.job-info{
-margin-top:10px;
-font-size:14px;
-color:gray;
+/* LINKS */
+.footer-box ul{
+  list-style: none;
+  padding: 0;
 }
 
-.apply-btn{
-margin-top:10px;
-padding:8px;
-background:#0f3460;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
+.footer-box ul li{
+  margin: 8px 0;
+  cursor: pointer;
+  color: #ddd;
+  transition: 0.3s;
+}
+
+.footer-box ul li:hover{
+  color: #fff;
+  padding-left: 5px;
+}
+
+/* MAP */
+.map-frame{
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 10px;
+}
+
+/* SOCIAL */
+.social i{
+  font-size: 18px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social i:hover{
+  transform: scale(1.2);
+  color: #ffd700;
+}
+
+/* BOTTOM BAR */
+.footer-bottom{
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 13px;
+  color: #ccc;
 }
 
 /* RESPONSIVE */
+@media(max-width:992px){
+  .footer-container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:600px){
+  .footer-container{
+    grid-template-columns: 1fr;
+  }
+
+  .footer{
+    padding: 40px 20px;
+  }
+}
+
+
+.btn{
+  display:inline-block;
+  padding:12px 25px;
+  background: linear-gradient(45deg,#2563eb,#1e40af);
+  color:#fff;
+  text-decoration:none;   /* ❌ removes underline */
+  border-radius:8px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+  background: linear-gradient(45deg,#1e40af,#2563eb);
+}
+
+
+
+    /* ================= HEADER ================= */
+    .header{
+      background:#fff;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 0;
+    }
+
+   
+    .nav-links{
+      list-style:none;
+      display:flex;
+      gap:25px;
+    }
+
+    .nav-links li{
+      position:relative;
+    }
+
+    .nav-links li a{
+      text-decoration:none;
+      color:#333;
+      font-weight:500;
+    }
+
+    .nav-links li a.active{
+      background:#1e90ff;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:5px;
+    }
+
+    .login-btn a{
+      text-decoration:none;
+      font-weight:bold;
+      color:#333;
+    }
+
+    /* Dropdown */
+    .dropdown-menu{
+      display:none;
+      position:absolute;
+      top:35px;
+      left:0;
+      background:#fff;
+      list-style:none;
+      padding:10px 0;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      border-radius:5px;
+      min-width:150px;
+    }
+
+    .dropdown-menu li{
+      padding:8px 20px;
+    }
+
+    .dropdown-menu li a{
+      color:#333;
+      display:block;
+    }
+
+    .dropdown-menu li a:hover{
+      background:#f2f2f2;
+    }
+
+    .dropdown:hover .dropdown-menu{
+      display:block;
+    }
+    .logo img {
+    width: 140px;   /* 🔥 increased */
+}
+.menu-toggle{
+  display:none;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* MOBILE FIX */
 @media(max-width:768px){
-.job-layout{
-flex-direction:column;
-}
-.filters{
-width:100%;
-}
+
+  .nav-container{
+    position:relative;
+  }
+
+  .menu-toggle{
+    display:block;
+    position:absolute;
+    right:15px;
+    top:15px;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:60px;
+    right:10px;
+    background:#fff;
+    width:200px;
+    padding:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .nav-links.show{
+    display:flex;
+  }
 }
 
-.logo-img{
-height:45px;
-cursor:pointer;
+/* Make footer links look like normal text */
+.footer-box ul li a {
+    color: #ddd;       /* same as your original text color */
+    text-decoration: none; /* remove underline */
+    transition: 0.3s;
 }
 
-.logo-img:hover{
-transform:scale(1.05);
-transition:0.3s;
-}
-.job-search{
-display:flex;
-justify-content:center;
-gap:10px;
-padding:20px;
+.footer-box ul li a:hover {
+    color: #fff;
+    padding-left: 5px;  /* same hover effect as before */
 }
 
-.job-search input{
-padding:10px;
-width:250px;
-border-radius:5px;
-border:1px solid #ccc;
+/* Make social links inherit icon style */
+.social a {
+    color: #fff;          /* default icon color */
+    text-decoration: none; /* remove underline */
 }
 
-.job-search button{
-padding:10px 15px;
-background:#e94560;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-
-.tags{
-text-align:center;
-margin-bottom:20px;
-}
-
-.tags span{
-background:#eee;
-padding:8px 12px;
-margin:5px;
-border-radius:20px;
-cursor:pointer;
-}
-
-.tags span:hover{
-background:#e94560;
-color:white;
-}
-
-.posted{
-font-size:12px;
-color:gray;
-margin-top:5px;
-}
-
-.job-card{
-opacity:0;
-transform:translateY(40px);
-animation:fadeUp 0.6s forwards;
-}
-
-@keyframes fadeUp{
-to{
-opacity:1;
-transform:translateY(0);
-}
+.social a:hover i {
+    transform: scale(1.2);
+    color: #ffd700;      /* same hover effect as before */
 }
 </style>
 </head>
 
 <body>
-
 <!-- HEADER -->
-<header class="top-header">
-<a href="jobs.html">
-  <img src="./images/white-logo.webp" class="logo-img">
+  <header class="header">
+    <div class="container nav-container">
+
+      <div class="logo">
+      <a href="jobs.html" class="logo">
+    <img src="images/logo.webp" alt="logo">
 </a>
+      </div>
+<div class="menu-toggle">☰</div>
+      <ul class="nav-links">
+        <li class="dropdown">
+          <a href="index.html" class="active">Home ▼</a>
+          <ul class="dropdown-menu">
+            <li><a href="index.html">Home 1</a></li>
+            <li><a href="home2.html">Home 2</a></li>
+          </ul>
+        </li>
 
-<ul class="main-menu">
-<li><a href="index.html">Home</a></li>
-<li><a href="jobs.html">Jobs</a></li>
-<li><a href="companies.html">Companies</a></li>
-<li><a href="profile.html">Profile</a></li>
-<li><a href="login.html">Login</a></li>
-</ul>
-</header>
-<section class="job-search">
-  <input type="text" placeholder="Search jobs...">
-  <button>Search</button>
-  
-</section>
-<div class="tags">
-  <span>Frontend</span>
-  <span>Backend</span>
-  <span>Remote</span>
-  <span>Internship</span>
+        <li><a href="jobs.html"> Jobs</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+
+      <div class="login-btn">
+        <a href="login.html" onclick="openLogin()">Login</a>
+      </div>
+
+    </div>
+  </header>
+
+<div class="container mt-4">
+
+    <!-- Search -->
+    <div class="search-box row g-2" data-aos="fade-down">
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Job title or keyword">
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" placeholder="Location">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Search</button>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Filters -->
+        <div class="col-md-3" data-aos="fade-right">
+            <div class="filter-box">
+                <h5>Filters</h5>
+                <hr>
+
+                <p><strong>Job Type</strong></p>
+                <input type="checkbox"> Full Time <br>
+                <input type="checkbox"> Remote <br>
+
+                <hr>
+
+                <p><strong>Experience</strong></p>
+                <input type="checkbox"> Fresher <br>
+                <input type="checkbox"> 2+ Years <br>
+
+                <hr>
+
+                <p><strong>Salary</strong></p>
+                <input type="checkbox"> 5 LPA+ <br>
+                <input type="checkbox"> 10 LPA+ <br>
+            </div>
+        </div>
+
+        <!-- Jobs -->
+        <div class="col-md-9">
+
+            <div class="job-card" data-aos="zoom-in">
+                <span class="badge-job">HOT</span>
+                <div class="job-title">Frontend Developer</div>
+                <div class="company">Infosys</div>
+                <div class="meta">📍 Hyderabad | 💼 Full Time | 💰 6-10 LPA</div>
+                <p>React developer needed with UI/UX skills.</p>
+                <a href="404.html" class="btn">Apply Now</a>
+            </div>
+
+            <div class="job-card" data-aos="zoom-in" data-aos-delay="100">
+                <span class="badge-job" style="background:#2ed573;">NEW</span>
+                <div class="job-title">Backend Developer</div>
+                <div class="company">TCS</div>
+                <div class="meta">📍 Bangalore | 💼 Full Time | 💰 8-12 LPA</div>
+                <p>Node.js + database experience required.</p>
+             <a href="404.html" class="btn">Apply Now</a>
+            </div>
+
+            <div class="job-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="job-title">UI/UX Designer</div>
+                <div class="company">Wipro</div>
+                <div class="meta">📍 Pune | 💼 Full Time | 💰 5-9 LPA</div>
+                <p>Creative designer for mobile & web apps.</p>
+                <a href="404.html" class="btn">Apply Now</a>
+            </div>
+<!-- Job Card -->
+<div class="job-card" data-aos="zoom-in" data-aos-delay="300">
+    <span class="badge-job" style="background:#ffa502;">URGENT</span>
+    <div class="job-title">Full Stack Developer</div>
+    <div class="company">HCL Technologies</div>
+    <div class="meta">📍 Noida | 💼 Full Time | 💰 10-15 LPA</div>
+    <p>Looking for MERN stack developer with 3+ years experience.</p>
+<a href="404.html" class="btn">Apply Now</a>
 </div>
-<h2 style="text-align:center;">🔥 Featured Jobs</h2>
-<!-- JOB SECTION -->
-<section class="jobs">
 
-<h2>All Jobs</h2>
-
-<div class="job-layout">
-
-<!-- FILTER -->
-<div class="filters">
-<h3>Filters</h3>
-
-<label>Location</label>
-<select>
-<option>All</option>
-<option>Remote</option>
-<option>Hyderabad</option>
-</select>
-
-<label>Experience</label>
-<select>
-<option>All</option>
-<option>0-2 Years</option>
-<option>3-5 Years</option>
-</select>
-
-<label>Salary</label>
-<select>
-<option>All</option>
-<option>3-6 LPA</option>
-<option>6-10 LPA</option>
-</select>
-
+<div class="job-card" data-aos="zoom-in" data-aos-delay="400">
+    <span class="badge-job" style="background:#1e90ff;">FEATURED</span>
+    <div class="job-title">Cloud Engineer</div>
+    <div class="company">Amazon</div>
+    <div class="meta">📍 Hyderabad | 💼 Full Time | 💰 15-25 LPA</div>
+    <p>Work with AWS services, cloud infra & deployment pipelines.</p>
+    <a href="404.html" class="btn">Apply Now</a>
 </div>
 
-
-
-<!-- JOB LIST -->
-<div class="job-container">
-
-<div class="job-card">
-<div class="job-top">
-  <p class="posted">Posted 2 days ago</p>
-<h3>Frontend Developer</h3>
-<i class="fa-regular fa-bookmark" onclick="saveJob(this)"></i>
-</div>
-<p>ABC Tech</p>
-
-<div class="job-info">
-<p>📍 Remote</p>
-<p>💼 2 Years</p>
-<p>💰 ₹5 LPA</p>
+<div class="job-card" data-aos="zoom-in" data-aos-delay="500">
+    <div class="job-title">Software Tester</div>
+    <div class="company">Cognizant</div>
+    <div class="meta">📍 Chennai | 💼 Full Time | 💰 4-8 LPA</div>
+    <p>Manual + automation testing with Selenium knowledge required.</p>
+    <a href="404.html" class="btn">Apply Now</a>
 </div>
 
-<button class="apply-btn" onclick="goTo404()">Apply</button>
+<div class="job-card" data-aos="zoom-in" data-aos-delay="600">
+    <span class="badge-job" style="background:#ff6b81;">HOT</span>
+    <div class="job-title">Android Developer</div>
+    <div class="company">Flipkart</div>
+    <div class="meta">📍 Bangalore | 💼 Full Time | 💰 12-20 LPA</div>
+    <p>Experience in Kotlin & Android app development.</p>
+    <a href="404.html" class="btn">Apply Now</a>
 </div>
 
-<div class="job-card">
-<div class="job-top">
-  <p class="posted">Posted 2 days ago</p>
-<h3>Backend Developer</h3>
-<i class="fa-regular fa-bookmark" onclick="saveJob(this)"></i>
-</div>
-<p>XYZ Company</p>
-
-<div class="job-info">
-<p>📍 Hyderabad</p>
-<p>💼 3 Years</p>
-<p>💰 ₹8 LPA</p>
+<div class="job-card" data-aos="zoom-in" data-aos-delay="700">
+    <div class="job-title">HR Executive</div>
+    <div class="company">Reliance</div>
+    <div class="meta">📍 Mumbai | 💼 Full Time | 💰 3-6 LPA</div>
+    <p>Handle recruitment, onboarding & employee engagement.</p>
+   <a href="404.html" class="btn">Apply Now</a>
 </div>
 
-<button class="apply-btn" onclick="goTo404()">Apply</button>
+<div class="job-card" data-aos="zoom-in" data-aos-delay="800">
+    <span class="badge-job" style="background:#2ed573;">NEW</span>
+    <div class="job-title">Digital Marketing Specialist</div>
+    <div class="company">Zomato</div>
+    <div class="meta">📍 Delhi | 💼 Full Time | 💰 5-9 LPA</div>
+    <p>SEO, SEM & social media marketing expert needed.</p>
+    <a href="404.html" class="btn">Apply Now</a>
 </div>
+        </div>
 
+    </div>
 </div>
+<footer class="footer">
 
-</div>
+  <div class="footer-container">
 
-</section>
-<div style="text-align:center; margin:20px;">
-  <button onclick="goTo404()">Load More</button>
-</div>
+    <!-- COLUMN 1 -->
+    <div class="footer-box">
+      <h2>JobPortal</h2>
+      <p>Connecting talent with top companies and helping you build your dream career.</p>
+
+      <h4>Our Location</h4>
+      <iframe 
+        src="https://maps.google.com/maps?q=Hyderabad&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        class="map-frame">
+      </iframe>
+    </div>
+
+    <!-- COLUMN 2 -->
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="404.html">Home</a></li>
+        <li><a href="404.html">Jobs</a></li>
+        <li><a href="404.html">Companies</a></li>
+        <li><a href="404.html">About</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 3 -->
+    <div class="footer-box">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="404.html">Find Jobs</a></li>
+        <li><a href="404.html">Post Jobs</a></li>
+        <li><a href="404.html">Career Guidance</a></li>
+        <li><a href="404.html">Resume Builder</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 4 -->
+    <div class="footer-box">
+      <h3>Follow Us</h3>
+      <div class="social">
+        <a href="404.html"><i class="fab fa-facebook"></i></a>
+        <a href="404.html"><i class="fab fa-twitter"></i></a>
+        <a href="404.html"><i class="fab fa-linkedin"></i></a>
+        <a href="404.html"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 JobPortal | All Rights Reserved
+  </div>
+
+</footer>
+<!-- AOS Script -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-
-function goTo404(){
-  window.location.href="404.html";
-}
-
-function saveJob(icon){
-
-let card = icon.closest(".job-card");
-
-let job = {
-title: card.querySelector("h3").innerText,
-company: card.querySelector("p").innerText
-};
-
-let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-jobs.push(job);
-localStorage.setItem("jobs", JSON.stringify(jobs));
-
-icon.classList.toggle("fa-solid");
-icon.style.color="#e94560";
-}
-
+AOS.init({
+    duration: 800,
+    once: true
+});
 </script>
 
 </body>
