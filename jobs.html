@@ -25,13 +25,15 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-/* Search */
 .search-box {
     background: white;
     padding: 18px;
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+
+    display: flex;
+    align-items: center;
 }
 
 /* Sidebar */
@@ -371,6 +373,21 @@ body {
     transform: scale(1.2);
     color: #ffd700;      /* same hover effect as before */
 }
+
+.search-box .btn {
+    height: 100%;
+}
+
+.search-box .row {
+  display: flex;
+  flex-wrap: nowrap;   /* ❗ THIS FIXES YOUR PROBLEM */
+}
+
+@media (max-width: 768px) {
+  .search-box .row {
+    flex-wrap: wrap;   /* mobile lo stack avvali */
+  }
+}
 </style>
 </head>
 
@@ -409,19 +426,23 @@ body {
   </header>
 
 <div class="container mt-4">
-
-    <!-- Search -->
-    <div class="search-box row g-2" data-aos="fade-down">
-        <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="Job title or keyword">
-        </div>
-        <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="Location">
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-primary w-100">Search</button>
-        </div>
+<div class="search-box" data-aos="fade-down">
+  <div class="row g-2 w-100">
+    
+    <div class="col-md-5 col-12">
+      <input type="text" class="form-control" placeholder="Job title or keyword">
     </div>
+
+    <div class="col-md-5 col-12">
+      <input type="text" class="form-control" placeholder="Location">
+    </div>
+
+    <div class="col-md-2 col-12">
+      <button class="btn btn-primary w-100">Search</button>
+    </div>
+
+  </div>
+</div>
 
     <div class="row">
 
