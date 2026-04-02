@@ -3,360 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - Stackly</title>
+<title>Stackly Pro Dashboard</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f4f7fb;
+/* ===== BODY ===== */
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:#f0f5f9;
+  overflow-x:hidden;
+  margin:0;
+  padding:0;
 }
 
-/* Sidebar */
-.sidebar {
-    height: 100vh;
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:sticky;
+  top:20px;
+  width:250px;
+  padding:25px 20px;
+  background: linear-gradient(180deg,#4b6cb7,#182848);
+  color:#fff;
+  border-radius: 12px;
+  float:left;
+}
+.sidebar h3{
+  margin-bottom:40px;
+  font-size:28px;
+  letter-spacing:1px;
+}
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#ddd;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:12px;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s ease, box-shadow 0.3s ease;
+}
+.sidebar a:hover{
+  background:#fff;
+  color:#4b6cb7;
+  transform:translateX(10px);
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+.sidebar a i{
+  min-width:20px;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main{
+  padding-left:270px;
+  padding-right:25px;
+  padding-top:20px;
+  animation: fadeUp 0.8s ease;
+}
+
+/* ===== TOPBAR ENHANCED ===== */
+.topbar{
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+  margin-bottom:20px;
+  position:relative;
+}
+.topbar-right{ display:flex; align-items:center; gap:15px;}
+#username{ font-weight:600; color:#333; }
+.logout-btn{
+  background:#ff4d4d;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  transition:0.3s ease, box-shadow 0.3s ease;
+}
+.logout-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ===== DROPDOWNS ===== */
+.topbar-right .notif-dropdown,
+.topbar-right .msg-dropdown,
+.topbar-right .profile-dropdown{
+  display:none;
+  position:absolute;
+  top:35px;
+  right:0;
+  width:220px;
+  z-index:1000;
+}
+.notification-wrapper:hover .notif-dropdown,
+.message-wrapper:hover .msg-dropdown,
+.profile-wrapper:hover .profile-dropdown{
+  display:block;
+}
+.notif-dropdown p,
+.msg-dropdown p,
+.profile-dropdown p{
+  margin:0;
+  padding:8px 5px;
+  cursor:pointer;
+  border-bottom:1px solid #eee;
+  transition:0.3s;
+}
+.notif-dropdown p:hover,
+.msg-dropdown p:hover,
+.profile-dropdown p:hover{
+  background:#f0f5f9;
+}
+
+/* ===== STATS CARDS ===== */
+.card-box{
+  color:#fff;
+  padding:25px;
+  border-radius:15px;
+  position:relative;
+  overflow:hidden;
+  animation: floatCard 6s ease-in-out infinite;
+  transition:0.3s;
+}
+.card-box h3{ font-size:28px; font-weight:700; }
+.card-box:hover{ transform:translateY(-8px) scale(1.03); }
+.card-box::before{
+  content:'';
+  position:absolute;
+  width:150%;
+  height:150%;
+  background:rgba(255,255,255,0.08);
+  transform:rotate(45deg);
+  top:-100%;
+  left:-100%;
+  transition:0.5s;
+}
+.card-box:hover::before{ top:0; left:0; }
+@keyframes floatCard{
+  0%,100%{ transform: translateY(0);}
+  50%{ transform: translateY(-5px);}
+}
+
+/* Gradient cards */
+.card-box:nth-child(1){ background: linear-gradient(135deg,#ff6a00,#ee0979); }
+.card-box:nth-child(2){ background: linear-gradient(135deg,#43cea2,#185a9d); }
+.card-box:nth-child(3){ background: linear-gradient(135deg,#ff512f,#dd2476); }
+.card-box:nth-child(4){ background: linear-gradient(135deg,#1f4037,#99f2c8); }
+
+/* TABLE */
+.table-striped > tbody > tr:nth-of-type(odd){ background-color:#ffe6e6; }
+.table-striped > tbody > tr:nth-of-type(even){ background-color:#e6f0ff; }
+.table tr:hover{ transform:scale(1.01); transition:0.3s; }
+
+/* ACTIVITY */
+.activity{ background:#fff; padding:20px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.08); margin-bottom:20px;}
+.activity h5{ color:#4b6cb7; font-weight:600; margin-bottom:15px; }
+.activity p{ border-bottom:1px solid #eee; padding-bottom:8px; opacity:0; transform:translateX(-20px) translateY(10px); animation: fadeSlideUp 0.8s forwards;}
+.activity p:nth-child(2){ animation-delay:0.2s; }
+.activity p:nth-child(3){ animation-delay:0.4s; }
+@keyframes fadeSlideUp{
+  0% { opacity:0; transform:translateX(-20px) translateY(10px); }
+  60% { opacity:1; transform:translateX(5px) translateY(-5px); }
+  80% { transform:translateX(-2px) translateY(2px);}
+  100%{ opacity:1; transform:translateX(0) translateY(0);}
+}
+
+/* TOP COMPANIES */
+.top-companies img{
+  border-radius:8px;
+  transition:0.3s;
+}
+.top-companies img:hover{ transform:scale(1.2); }
+
+/* PROGRESS BAR */
+.progress{
+  height:20px;
+  border-radius:12px;
+  overflow:hidden;
+}
+.progress-bar{
+  background: linear-gradient(135deg,#ff6a00,#ffcc00);
+  font-weight:600;
+  transition:1s;
+}
+
+/* TASKS */
+.task-list p{
+  background:#f0f0f0;
+  padding:8px 12px;
+  border-radius:8px;
+  margin-bottom:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:0.3s;
+}
+.task-list p:hover{ background:#d1f0ff; transform:scale(1.02);}
+.task-list i{ color:#4b6cb7; cursor:pointer;}
+
+/* QUICK LINKS */
+.quick-links .card{
+  transition:0.3s;
+}
+.quick-links .card:hover{
+  transform:translateY(-5px) scale(1.03);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{ width:100%; float:none; top:0; border-radius:0; margin-bottom:20px;}
+  .main{ padding-left:15px;}
+}
+
+
+/* Footer */
+footer {
     background: #111;
     color: white;
-    padding: 20px;
-    position: fixed;
-    width: 220px;
-}
-.sidebar a {
-    display: block;
-    color: #ccc;
-    padding: 10px;
-    text-decoration: none;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-.sidebar a:hover {
-    background: #007bff;
-    color: white;
-}
-
-/* Main */
-.main {
-    margin-left: 240px;
+    text-align: center;
     padding: 20px;
 }
 
-/* Topbar */
-.topbar {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+.footer{
+  background: linear-gradient(135deg, #0f3460, #1b4fa1);
+  color: #fff;
+  padding: 60px 80px;
 }
 
-/* Cards */
-.card-box {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
+/* PERFECT GRID */
+.footer-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  align-items: start;
+}
+
+/* TEXT */
+.footer-box h2{
+  margin-bottom: 10px;
+}
+
+.footer-box p{
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #dcdcdc;
+}
+
+.footer-box h3{
+  margin-bottom: 15px;
+}
+
+/* LINKS */
+.footer-box ul{
+  list-style: none;
+  padding: 0;
+}
+
+.footer-box ul li{
+  margin: 8px 0;
+  cursor: pointer;
+  color: #ddd;
+  transition: 0.3s;
+}
+
+.footer-box ul li:hover{
+  color: #fff;
+  padding-left: 5px;
+}
+
+/* MAP */
+.map-frame{
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 10px;
+}
+
+/* SOCIAL */
+.social i{
+  font-size: 18px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social i:hover{
+  transform: scale(1.2);
+  color: #ffd700;
+}
+
+/* BOTTOM BAR */
+.footer-bottom{
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 13px;
+  color: #ccc;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+  .footer-container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:600px){
+  .footer-container{
+    grid-template-columns: 1fr;
+  }
+
+  .footer{
+    padding: 40px 20px;
+  }
+}
+
+/* Make footer links look like normal text */
+.footer-box ul li a {
+    color: #ddd;       /* same as your original text color */
+    text-decoration: none; /* remove underline */
     transition: 0.3s;
 }
-.card-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+.footer-box ul li a:hover {
+    color: #fff;
+    padding-left: 5px;  /* same hover effect as before */
 }
 
-/* Table */
-.table {
-    background: white;
-    border-radius: 10px;
+/* Make social links inherit icon style */
+.social a {
+    color: #fff;          /* default icon color */
+    text-decoration: none; /* remove underline */
 }
 
-/* Activity */
-.activity {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
+.social a:hover i {
+    transform: scale(1.2);
+    color: #ffd700;      /* same hover effect as before */
 }
-.activity p {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-
-/* Responsive */
-@media(max-width:768px){
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-    .main {
-        margin-left: 0;
-    }
-}
-
-
-
-    /* ================= HEADER ================= */
-    .header{
-      background:#fff;
-      box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .nav-container{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:15px 0;
-    }
-
-   
-    .nav-links{
-      list-style:none;
-      display:flex;
-      gap:25px;
-    }
-
-    .nav-links li{
-      position:relative;
-    }
-
-    .nav-links li a{
-      text-decoration:none;
-      color:#333;
-      font-weight:500;
-    }
-
-    .nav-links li a.active{
-      background:#1e90ff;
-      color:#fff;
-      padding:6px 12px;
-      border-radius:5px;
-    }
-
-    .login-btn a{
-      text-decoration:none;
-      font-weight:bold;
-      color:#333;
-    }
-
-    /* Dropdown */
-    .dropdown-menu{
-      display:none;
-      position:absolute;
-      top:35px;
-      left:0;
-      background:#fff;
-      list-style:none;
-      padding:10px 0;
-      box-shadow:0 5px 15px rgba(0,0,0,0.1);
-      border-radius:5px;
-      min-width:150px;
-    }
-
-    .dropdown-menu li{
-      padding:8px 20px;
-    }
-
-    .dropdown-menu li a{
-      color:#333;
-      display:block;
-    }
-
-    .dropdown-menu li a:hover{
-      background:#f2f2f2;
-    }
-
-    .dropdown:hover .dropdown-menu{
-      display:block;
-    }
-    .logo img {
-    width: 140px;   /* 🔥 increased */
-}
-.menu-toggle{
-  display:none;
-  font-size:22px;
-  cursor:pointer;
-}
-
-/* MOBILE FIX */
-@media(max-width:768px){
-
-  .nav-container{
-    position:relative;
-  }
-
-  .menu-toggle{
-    display:block;
-    position:absolute;
-    right:15px;
-    top:15px;
-  }
-
-  .nav-links{
-    display:none;
-    flex-direction:column;
-    position:absolute;
-    top:60px;
-    right:10px;
-    background:#fff;
-    width:200px;
-    padding:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-  }
-
-  .nav-links.show{
-    display:flex;
-  }
-}
-
-
 
 </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container nav-container">
-
-      <div class="logo">
-      <a href="dashboard.html" class="logo">
-    <img src="images/logo.webp" alt="logo">
-</a>
-      </div>
-<div class="menu-toggle">☰</div>
-      <ul class="nav-links">
-        <li class="dropdown">
-          <a href="index.html" class="active">Home ▼</a>
-          <ul class="dropdown-menu">
-            <li><a href="index.html">Home 1</a></li>
-            <li><a href="home2.html">Home 2</a></li>
-          </ul>
-        </li>
-
-        <li><a href="jobs.html"> Jobs</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-      </ul>
-
-      <div class="login-btn">
-        <a href="login.html" onclick="openLogin()">Login</a>
-      </div>
-
-    </div>
-  </header>
-
-<!-- Sidebar -->
+<!-- SIDEBAR -->
 <div class="sidebar">
-<h4>Stackly</h4>
-<a href="404.html"><i class="fas fa-home"></i> Dashboard</a>
-<a href="404.html"><i class="fas fa-briefcase"></i> Jobs</a>
-<a href="404.html"><i class="fas fa-user"></i> Profile</a>
-<a href="404.html"><i class="fas fa-file"></i> Applications</a>
-<a href="404.html"><i class="fas fa-cog"></i> Settings</a>
+  <h3>Stackly</h3>
+  <a href="404.html"><i class="fas fa-home"></i> Dashboard</a>
+  <a href="404.html"><i class="fas fa-briefcase"></i> Jobs</a>
+  <a href="404.html"><i class="fas fa-user"></i> Profile</a>
+  <a href="404.html"><i class="fas fa-file"></i> Applications</a>
+  <a href="404.html"><i class="fas fa-cog"></i> Settings</a>
 </div>
 
-<!-- Main -->
+<!-- MAIN -->
 <div class="main">
 
-<!-- Topbar -->
-<div class="topbar d-flex justify-content-between">
-<h5>Dashboard</h5>
-<span>Welcome, User 👋</span>
+<!-- TOPBAR ENHANCED -->
+<div class="topbar">
+  <h5>Dashboard</h5>
+  <div class="topbar-right">
+
+    <!-- Notifications -->
+    <div class="notification-wrapper position-relative">
+      <i class="fas fa-bell fa-lg" id="notifIcon" style="cursor:pointer;"></i>
+      <span class="badge rounded-circle bg-danger position-absolute" style="top:-5px; right:-5px; font-size:10px;" id="notifCount">3</span>
+      <div class="notif-dropdown bg-white p-3 shadow rounded" id="notifDropdown">
+        <p><strong>New job posted</strong></p>
+        <p>Application viewed</p>
+        <p>Message from HR</p>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="message-wrapper position-relative">
+      <i class="fas fa-envelope fa-lg" id="msgIcon" style="cursor:pointer;"></i>
+      <span class="badge rounded-circle bg-danger position-absolute" style="top:-5px; right:-5px; font-size:10px;" id="msgCount">2</span>
+      <div class="msg-dropdown bg-white p-3 shadow rounded" id="msgDropdown">
+        <p><strong>HR Message:</strong> Interview confirmed</p>
+        <p><strong>Recruiter:</strong> Profile viewed</p>
+      </div>
+    </div>
+ 
+    <!-- Profile -->
+    <!-- <div class="profile-wrapper position-relative">
+      <img src="https://via.placeholder.com/40" alt="avatar" class="rounded-circle" id="profileIcon" style="cursor:pointer;">
+      <div class="profile-dropdown bg-white p-3 shadow rounded" id="profileDropdown">
+        <p><i class="fas fa-user me-2"></i> Profile</p>
+        <p><i class="fas fa-cog me-2"></i> Settings</p>
+        <p><i class="fas fa-sign-out-alt me-2"></i> <span onclick="logout()">Logout</span></p>
+      </div>
+    </div>  -->
+
+  </div>
 </div>
 
-<!-- Stats -->
-<div class="row g-4">
-
-<div class="col-md-3" data-aos="zoom-in">
-<div class="card-box">
-<h6>Total Jobs</h6>
-<h3>120</h3>
-</div>
+<!-- STATS CARDS -->
+<div class="row mt-4 g-4">
+  <div class="col-md-3" data-aos="zoom-in"><div class="card-box"><h6>Total Jobs</h6><h3 id="totalJobs">0</h3></div></div>
+  <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100"><div class="card-box"><h6>Applications</h6><h3 id="applications">0</h3></div></div>
+  <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200"><div class="card-box"><h6>Interviews</h6><h3 id="interviews">0</h3></div></div>
+  <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300"><div class="card-box"><h6>Offers</h6><h3 id="offers">0</h3></div></div>
 </div>
 
-<div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
-<div class="card-box">
-<h6>Applications</h6>
-<h3>45</h3>
-</div>
-</div>
-
-<div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
-<div class="card-box">
-<h6>Interviews</h6>
-<h3>10</h3>
-</div>
+<!-- APPLICATIONS CHART -->
+<div class="mt-5" data-aos="fade-up">
+<h5>Applications Trend</h5>
+<canvas id="applicationsChart" height="100"></canvas>
 </div>
 
-<div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
-<div class="card-box">
-<h6>Offers</h6>
-<h3>3</h3>
+<!-- TOP COMPANIES -->
+<div class="mt-5 top-companies" data-aos="fade-up">
+<h5>Top Companies Hiring</h5>
+<div class="d-flex flex-wrap gap-3 mt-3">
+<img src="images/download.webp" alt="Infosys" height="50">
+<img src="images/download (1).webp" alt="TCS" height="50">
+<img src="images/google_PNG102344 (1).webp" alt="Google" height="50">
+<img src="images/OIP (1).webp" alt="HCL" height="50">
 </div>
 </div>
 
-</div>
-
-<!-- Table -->
+<!-- PROFILE COMPLETENESS -->
 <div class="mt-4" data-aos="fade-up">
+<h5>Profile Completeness</h5>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width:70%">70%</div>
+</div>
+</div>
+
+<!-- RECENT JOBS -->
+<div class="mt-5" data-aos="fade-up">
 <h5>Recent Jobs</h5>
 <table class="table table-striped mt-3">
-<tr>
-<th>Company</th>
-<th>Role</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>Infosys</td>
-<td>Frontend Dev</td>
-<td><span class="badge bg-success">Applied</span></td>
-</tr>
-
-<tr>
-<td>TCS</td>
-<td>Backend Dev</td>
-<td><span class="badge bg-warning">Pending</span></td>
-</tr>
-
-<tr>
-<td>Wipro</td>
-<td>Tester</td>
-<td><span class="badge bg-danger">Rejected</span></td>
-</tr>
-
+<tr><th>Company</th><th>Role</th><th>Status</th></tr>
+<tr><td>Infosys</td><td>Frontend Dev</td><td><span class="badge bg-success">Applied</span></td></tr>
+<tr><td>TCS</td><td>Backend Dev</td><td><span class="badge bg-warning">Pending</span></td></tr>
+<tr><td>Wipro</td><td>Tester</td><td><span class="badge bg-danger">Rejected</span></td></tr>
 </table>
 </div>
 
-<!-- Activity -->
+<!-- RECENT ACTIVITY -->
 <div class="row mt-4">
-<div class="col-md-6" data-aos="fade-right">
+<div class="col-md-6" data-aos="fade-right"><div class="activity"><h5>Recent Activity</h5><p>Applied for Frontend Developer</p><p>Interview scheduled</p><p>Profile updated</p></div></div>
+<div class="col-md-6" data-aos="fade-left"><div class="activity"><h5>Notifications</h5><p>New job posted</p><p>Application viewed</p><p>Message from HR</p></div></div>
+</div>
+
+<!-- UPCOMING INTERVIEWS -->
+<div class="mt-5" data-aos="fade-up">
+<h5>Upcoming Interviews</h5>
 <div class="activity">
-<h5>Recent Activity</h5>
-<p>Applied for Frontend Developer</p>
-<p>Interview scheduled with TCS</p>
-<p>Profile updated</p>
+<p><strong>Frontend Dev - Infosys</strong> | 10 Apr 2026 | 11:00 AM</p>
+<p><strong>Backend Dev - TCS</strong> | 12 Apr 2026 | 02:00 PM</p>
+<p><strong>Tester - Wipro</strong> | 15 Apr 2026 | 09:30 AM</p>
 </div>
 </div>
 
-<div class="col-md-6" data-aos="fade-left">
-<div class="activity">
-<h5>Notifications</h5>
-<p>New job posted</p>
-<p>Application viewed</p>
-<p>Message from recruiter</p>
+<!-- TASKS -->
+<div class="mt-5" data-aos="fade-up">
+<h5>My Tasks</h5>
+<div class="task-list">
+<p>Update Resume <i class="fas fa-check-circle"></i></p>
+<p>Submit Portfolio <i class="fas fa-check-circle"></i></p>
+<p>Prepare for Interview <i class="fas fa-check-circle"></i></p>
 </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="mt-5" data-aos="fade-up">
+<h5>Quick Links</h5>
+<div class="row quick-links mt-3 g-3">
+<div class="col-md-3"><div class="card p-3 text-center"><i class="fas fa-file-alt fa-2x mb-2"></i><p>Resume Tips</p></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><i class="fas fa-lightbulb fa-2x mb-2"></i><p>Coding Tests</p></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><i class="fas fa-bell fa-2x mb-2"></i><p>Job Alerts</p></div></div>
+<div class="col-md-3"><div class="card p-3 text-center"><i class="fas fa-graduation-cap fa-2x mb-2"></i><p>Courses</p></div></div>
 </div>
 </div>
 
 </div>
+<footer class="footer section">
 
+  <div class="footer-container">
+
+    <!-- COLUMN 1 -->
+    <div class="footer-box">
+      <h2>JobPortal</h2>
+      <p>Connecting talent with top companies and helping you build your dream career.</p>
+
+      <h4>Our Location</h4>
+      <iframe 
+        src="https://maps.google.com/maps?q=Hyderabad&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        class="map-frame">
+      </iframe>
+    </div>
+
+    <!-- COLUMN 2 -->
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="404.html">Home</a></li>
+        <li><a href="404.html">Jobs</a></li>
+        <li><a href="404.html">Companies</a></li>
+        <li><a href="404.html">About</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 3 -->
+    <div class="footer-box">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="404.html">Find Jobs</a></li>
+        <li><a href="404.html">Post Jobs</a></li>
+        <li><a href="404.html">Career Guidance</a></li>
+        <li><a href="404.html">Resume Builder</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 4 -->
+    <div class="footer-box">
+      <h3>Follow Us</h3>
+      <div class="social">
+        <a href="404.html"><i class="fab fa-facebook"></i></a>
+        <a href="404.html"><i class="fab fa-twitter"></i></a>
+        <a href="404.html"><i class="fab fa-linkedin"></i></a>
+        <a href="404.html"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 JobPortal | All Rights Reserved
+  </div>
+
+</footer>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>AOS.init({duration:1000});</script>
+<script>
+AOS.init({duration:1000});
+
+// Count-up animation
+function animateValue(id,start,end,duration){
+let obj=document.getElementById(id),current=start,range=end-start,inc=end>start?1:-1,stepTime=Math.abs(Math.floor(duration/range)),timer=setInterval(function(){current+=inc;obj.innerText=current;if(current==end){clearInterval(timer);}},stepTime);
+}
+animateValue('totalJobs',0,120,1500);
+animateValue('applications',0,45,1500);
+animateValue('interviews',0,10,1500);
+animateValue('offers',0,3,1500);
+
+// Applications Chart
+const ctx=document.getElementById('applicationsChart').getContext('2d');
+const applicationsChart=new Chart(ctx,{
+type:'line',
+data:{ labels:['Jan','Feb','Mar','Apr','May','Jun'], datasets:[{ label:'Applications', data:[5,12,9,15,8,20], backgroundColor:'rgba(30,60,114,0.2)', borderColor:'#1e3c72', borderWidth:3, tension:0.4, fill:true, pointBackgroundColor:'#1b4fa1' }]},
+options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true } } }
+});
+
+// Username + Logout
+const userData = localStorage.getItem("user");
+if(userData){ const user = JSON.parse(userData); document.getElementById("username").innerText = "Welcome, " + user.name + " 👋"; }
+function logout(){ localStorage.removeItem("user"); window.location.href="login.html"; }
+</script>
 
 </body>
 </html>

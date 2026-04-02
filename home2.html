@@ -401,6 +401,29 @@ footer{background:#222;color:white;text-align:center;padding:20px}
   background: #1e40af;
   transform: scale(1.05);
 }
+
+/* ===== ANIMATIONS ===== */
+.section{
+  opacity:0;
+  transform:translateY(50px);
+  transition:0.6s;
+}
+
+.section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Card hover */
+.job-card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Button animation */
+.btn:hover{
+  transform:scale(1.1);
+}
 </style>
 </head>
 
@@ -438,11 +461,11 @@ footer{background:#222;color:white;text-align:center;padding:20px}
     </div>
   </header>
 <!-- HERO -->
-<div class="hero" data-aos="fade-down">
+<div class="hero" data-aos="fade-down section">
   <h1>Find Your Dream Job</h1>
   <p>Search thousands of jobs easily</p>
 
-  <div class="search-box">
+  <div class="search-box section">
     <input placeholder="Job title">
     <input placeholder="Location">
     <button>Search</button>
@@ -450,7 +473,7 @@ footer{background:#222;color:white;text-align:center;padding:20px}
 </div>
 
 <!-- FEATURES -->
-<div class="features">
+<div class="features section">
   <div class="card" data-aos="fade-up">
     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="60">
     <h3>Top Jobs</h3>
@@ -471,7 +494,7 @@ footer{background:#222;color:white;text-align:center;padding:20px}
 </div>
 
 <!-- JOBS -->
-<div class="jobs">
+<div class="jobs section">
   <h2 data-aos="fade-up">Latest Jobs</h2>
 
   <div class="job-list">
@@ -499,7 +522,7 @@ footer{background:#222;color:white;text-align:center;padding:20px}
 </div>
 
 <!-- COMPANIES -->
-<div class="companies" data-aos="fade-up">
+<div class="companies" data-aos="fade-up section">
   <h2>Top Companies Hiring</h2>
   <div class="company-logos">
     <img src="images/download (3).webp">
@@ -511,13 +534,13 @@ footer{background:#222;color:white;text-align:center;padding:20px}
 </div>
 
 <!-- IMAGE SECTION -->
-<div class="image-section" data-aos="fade-up">
+<div class="image-section" data-aos="fade-up section">
   <h2>Build Your Career With Us</h2>
   <img src="https://images.unsplash.com/photo-1551434678-e076c223a692" style="width:80%;border-radius:10px;">
 </div>
 
 <!-- HOW IT WORKS -->
-<div class="how-it-works">
+<div class="how-it-works section">
   <h2 data-aos="fade-up">How It Works</h2>
   <div class="steps">
     <div class="step" data-aos="fade-right">Create Account</div>
@@ -527,7 +550,7 @@ footer{background:#222;color:white;text-align:center;padding:20px}
 </div>
 
 <!-- TESTIMONIALS -->
-<div class="testimonials">
+<div class="testimonials section">
   <h2 data-aos="fade-up">What Users Say</h2>
   <div class="reviews">
     <div class="review" data-aos="flip-left">
@@ -545,12 +568,12 @@ footer{background:#222;color:white;text-align:center;padding:20px}
 </div>
 
 <!-- CTA -->
-<div class="cta" data-aos="zoom-in">
+<div class="cta" data-aos="zoom-in section">
   <h2>Ready to Start Your Career?</h2>
    <a href="404.html" class="btn">Get Started</a>
 </div>
 
-<footer class="footer">
+<footer class="footer section">
 
   <div class="footer-container">
 
@@ -611,6 +634,19 @@ footer{background:#222;color:white;text-align:center;padding:20px}
 <script>
 AOS.init({duration:1000});
 </script>
+<script>
+const sections = document.querySelectorAll('.section');
 
+window.addEventListener('scroll', () => {
+  sections.forEach(sec => {
+    let top = sec.getBoundingClientRect().top;
+    let screen = window.innerHeight;
+
+    if(top < screen - 100){
+      sec.classList.add('show');
+    }
+  });
+});
+</script>
 </body>
 </html>

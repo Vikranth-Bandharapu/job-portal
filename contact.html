@@ -343,6 +343,29 @@ footer {
     transform: scale(1.2);
     color: #ffd700;      /* same hover effect as before */
 }
+
+/* ===== ANIMATIONS ===== */
+.section{
+  opacity:0;
+  transform:translateY(50px);
+  transition:0.6s;
+}
+
+.section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Card hover */
+.job-card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Button animation */
+.btn:hover{
+  transform:scale(1.1);
+}
 </style>
 </head>
 
@@ -383,13 +406,13 @@ footer {
 
 
 <!-- Hero -->
-<div class="hero" data-aos="zoom-in">
+<div class="hero" data-aos="zoom-in section">
 <h1>Contact Us</h1>
 <p>We are here to help you 💬</p>
 </div>
 
 <!-- MAIN SECTION -->
-<div class="container section">
+<div class="container section section">
 <div class="row">
 
 <!-- LEFT: FORM -->
@@ -409,7 +432,7 @@ footer {
 </div>
 
 <!-- RIGHT: IMAGE + INFO -->
-<div class="col-md-6" data-aos="fade-left">
+<div class="col-md-6" data-aos="fade-left section">
 
 <div class="contact-img mb-4">
 <img src="images/contact (1).webp">
@@ -457,12 +480,12 @@ footer {
 </div>
 
 <!-- CTA -->
-<div class="hero" data-aos="zoom-in">
+<div class="hero" data-aos="zoom-in section">
 <h2>Need Help?</h2>
 <p>Our team is ready to assist you anytime</p>
 <a href="404.html" class="btn">Chat now</a>
 </div>
-<footer class="footer">
+<footer class="footer section">
 
   <div class="footer-container">
 
@@ -545,6 +568,19 @@ document.querySelector('.form-box button').addEventListener('click', function(e)
 </script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>AOS.init({duration:1000});</script>
+<script>
+const sections = document.querySelectorAll('.section');
 
+window.addEventListener('scroll', () => {
+  sections.forEach(sec => {
+    let top = sec.getBoundingClientRect().top;
+    let screen = window.innerHeight;
+
+    if(top < screen - 100){
+      sec.classList.add('show');
+    }
+  });
+});
+</script>
 </body>
 </html>

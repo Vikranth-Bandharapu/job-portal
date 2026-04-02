@@ -388,6 +388,28 @@ body {
     flex-wrap: wrap;   /* mobile lo stack avvali */
   }
 }
+/* ===== ANIMATIONS ===== */
+.section{
+  opacity:0;
+  transform:translateY(50px);
+  transition:0.6s;
+}
+
+.section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Card hover */
+.job-card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Button animation */
+.btn:hover{
+  transform:scale(1.1);
+}
 </style>
 </head>
 
@@ -444,7 +466,7 @@ body {
   </div>
 </div>
 
-    <div class="row">
+    <div class="row  section">
 
         <!-- Filters -->
         <div class="col-md-3" data-aos="fade-right">
@@ -471,7 +493,7 @@ body {
         </div>
 
         <!-- Jobs -->
-        <div class="col-md-9">
+        <div class="col-md-9 section">
 
             <div class="job-card" data-aos="zoom-in">
                 <span class="badge-job">HOT</span>
@@ -554,7 +576,7 @@ body {
 
     </div>
 </div>
-<footer class="footer">
+<footer class="footer section">
 
   <div class="footer-container">
 
@@ -618,6 +640,19 @@ AOS.init({
     once: true
 });
 </script>
+<script>
+const sections = document.querySelectorAll('.section');
 
+window.addEventListener('scroll', () => {
+  sections.forEach(sec => {
+    let top = sec.getBoundingClientRect().top;
+    let screen = window.innerHeight;
+
+    if(top < screen - 100){
+      sec.classList.add('show');
+    }
+  });
+});
+</script>
 </body>
 </html>

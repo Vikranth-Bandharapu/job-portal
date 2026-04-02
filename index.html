@@ -278,6 +278,30 @@
     transform: scale(1.2);
     color: #ffd700;      /* same hover effect as before */
 }
+  /* ===== ANIMATIONS ===== */
+.section{
+  opacity:0;
+  transform:translateY(50px);
+  transition:0.6s;
+}
+
+.section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Card hover */
+.job-card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Button animation */
+.btn:hover{
+  transform:scale(1.1);
+}
+  
+  
   </style>
 </head>
 
@@ -316,7 +340,7 @@
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero section">
   <div class="container hero-content">
     <h1>Find Your Dream Job Today</h1>
     <p>Search thousands of jobs from top companies</p>
@@ -328,7 +352,7 @@
     </div>
   </div>
 </section>
-<section class="jobs">
+<section class="jobs section">
   <div class="container">
     <h2 class="section-title">Latest Jobs</h2>
 
@@ -375,7 +399,7 @@
 </section>
 
 
-<section class="companies">
+<section class="companies section">
   <div class="container">
     <h2 class="section-title">Trusted By Top Companies</h2>
 <div class="logo-slider">
@@ -387,7 +411,7 @@
 </div>
   </div>
 </section>
-<section class="stats">
+<section class="stats section">
   <div class="container stats-container">
 
     <div class="stat-box" data-aos="zoom-in">
@@ -413,7 +437,7 @@
   </div>
 </section>
 
-<section class="featured-jobs">
+<section class="featured-jobs section">
   <div class="container">
 
     <h2 class="section-title">Featured Jobs</h2>
@@ -465,7 +489,7 @@
   </div>
 </section>
 
-<section class="testimonials">
+<section class="testimonials section">
   <div class="container">
     <h2 class="section-title">What Our Users Say</h2>
 
@@ -501,7 +525,7 @@
     <button>Login</button>
   </div>
 </div>
-<footer class="footer">
+<footer class="footer section">
 
   <div class="footer-container">
 
@@ -603,6 +627,18 @@ function closeLogin(){
 }
 
 
+const sections = document.querySelectorAll('.section');
+
+window.addEventListener('scroll', () => {
+  sections.forEach(sec => {
+    let top = sec.getBoundingClientRect().top;
+    let screen = window.innerHeight;
+
+    if(top < screen - 100){
+      sec.classList.add('show');
+    }
+  });
+});
 
 </script>
 </body>
